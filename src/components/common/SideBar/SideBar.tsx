@@ -2,7 +2,7 @@ import './SideBar.scss';
 import Pages from './pages/Pages';
 import Profile from './profile/Profile';
 import UserOptions from './userOptions/UserOptions';
-import VerticalBorder from './verticalBorder/VerticalBorder';
+import VerticalBorder from '../verticalBorder/VerticalBorder';
 
 export default function SideBar() {
     return (
