@@ -1,12 +1,12 @@
 import './UserOption.scss';
 
-export default function UserOption() {
+export default function UserOption(props: any) {
     return (
         <div className='userOption_main'>
             <div className="userOption_icon_bg">
-                <img src={require('src/assets/icons/logout.png')} alt="setting icon" className='userOption_icon' />
+                {props.userOptionIcon}
             </div>
-            <div className="userOption_name">Logout</div>
+            <div className="userOption_name">{props.userOptionName}</div>
         </div>
     );
 };
