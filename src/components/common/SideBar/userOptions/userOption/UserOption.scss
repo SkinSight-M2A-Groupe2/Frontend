@@ -1,0 +1,21 @@
+@import "src/styles/main.scss";
+
+.userOption_main {
+    width: 60%;
+    margin: 2vh auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.userOption_icon_bg {
+    padding: 1vh 0.9vw;
+}
+
+.userOption_icon {
+    width: 3vh;
+}
+
+.userOption_name {
+    margin: 0 0 0 1vw;
+}

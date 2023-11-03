@@ -1,0 +1,32 @@
+@import "src/styles/main.scss";
+
+.page_main {
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.page_main:hover {
+    cursor: pointer;
+    background-color: $primary_1;
+}
+
+.page_icon_bg {
+    background-color: $bg_2;
+    border-radius: 10%;
+    padding: 0.7vh 0.7vw;
+}
+
+.page_icon_bg.selected {
+    background-color: $primary_1;
+}
+
+.page_icon {
+    width: 3vh;
+}
+
+.page_name {
+    font-weight: bold;
+    margin: 0 0 0 2vw;
+}
