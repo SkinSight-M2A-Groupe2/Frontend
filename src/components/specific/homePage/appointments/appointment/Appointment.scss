@@ -1,0 +1,53 @@
+@import 'src/styles/main';
+
+.Appointment_container {
+    text-align: left;
+    background-color: $primary_1;
+    border-radius: 1rem;
+    padding: 1vh 1vw 2vh;
+    margin: 1.5vh 0.3vw;
+    flex-grow: 1;
+}
+
+.Appointment_container:hover {
+    background-color: $accent_1;
+    cursor: pointer;
+}
+
+.Appointment_icon {
+    background-color: $accent_1;
+    width: fit-content;
+    padding: 0.5vh 0.5vw;
+    margin: 1vh 0vw;
+    border-radius: 20%;
+}
+
+.Appointment_doctor {
+    font-weight: bold;
+    font-size: large;
+    margin: 2vh 0 0vh 0;
+}
+
+.Appointment_speciality {
+    font-size: small;
+    margin: 0vh 0 2vh 0;
+    color: $text_2;
+}
+
+.appointment_date_time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.appointment_date_time_subcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Appointment_date_time_icon {
+    color: $accent_1;
+}

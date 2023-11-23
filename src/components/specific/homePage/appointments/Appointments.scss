@@ -1,0 +1,34 @@
+@import 'src/styles/main';
+
+.Appointment_main {
+    margin: 3vh 0 0;
+}
+
+.Appointments_container {
+    display: flex;
+    overflow-x: auto;
+}
+
+.Appointment_head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Appointment_title {
+    font-weight: bold;
+    font-size: large;
+    margin: 2vh 0 0vh 0;
+    text-align: left;
+}
+
+.Appointment_link {
+    margin: 2vh 0 0vh 0;
+    color: $accent_2;
+    font-size: small;
+}
+
+.Appointment_link:hover {
+    cursor: pointer;
+}
