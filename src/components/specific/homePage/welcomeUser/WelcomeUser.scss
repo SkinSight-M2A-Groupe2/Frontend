@@ -1,0 +1,31 @@
+@import 'src/styles/main';
+
+.welcomeUser-container {
+    background: rgb(0, 97, 154);
+    background: linear-gradient(90deg, $gradient_accent_2 0%, $gradient_accent_1 53%);
+    border-radius: 10px;
+    text-align: left;
+    color: white;
+    padding: 3vh 1vw;
+}
+
+.welcomeUser-welcome {
+    font-size: 1rem;
+    margin-bottom: 1vh;
+}
+
+.welcomeUser-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 3vh;
+}
+
+.welcomeUser-button-check {
+    background-color: white;
+    color: $accent_2;
+    border: none;
+    border-radius: 50px;
+    padding: 1.5vh 3vw;
+    font-size: 1rem;
+    font-weight: bold;
+}

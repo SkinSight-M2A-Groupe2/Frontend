@@ -1,0 +1,32 @@
+@import 'src/styles/main';
+
+.barOption_main {
+    text-align: left;
+    background-color: $primary_1;
+    border-radius: 1rem;
+    padding: 0.5vh 0;
+    margin: 1.5vh 0;
+    font-size: small;
+}
+
+.barOption_main:hover {
+    background-color: $accent_1;
+    cursor: pointer;
+}
+
+.barOption_icon {
+    background-color: $accent_1;
+    width: fit-content;
+    padding: 0.5vh 0.5vw;
+    margin: 1vh 1vw;
+    border-radius: 20%;
+}
+
+.barOption_title {
+    font-weight: bold;
+    margin: 1vh 1vw;
+}
+
+.barOption_description {
+    margin: 0vh 1vw 1vh;
+}
