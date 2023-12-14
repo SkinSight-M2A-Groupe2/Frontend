@@ -1,0 +1,30 @@
+@import 'src/styles/main';
+
+.NearBys_main {
+    width: 50%;
+}
+
+.NearBys_head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 1vh;
+}
+
+.NearBys_title {
+    font-weight: bold;
+    font-size: large;
+    margin: 2vh 0 0vh 0;
+    text-align: left;
+}
+
+.NearBys_link {
+    margin: 2vh 0 0vh 0;
+    color: $accent_2;
+    font-size: small;
+}
+
+.NearBys_link:hover {
+    cursor: pointer;
+}

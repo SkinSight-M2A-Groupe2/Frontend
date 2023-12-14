@@ -1,0 +1,43 @@
+@import 'src/styles/main';
+
+.Tip_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: $primary_1;
+    border-radius: 1rem;
+    width: 100%;
+    margin: 1vh 0;
+    padding: 1vh 0;
+}
+
+.Tip_container:hover {
+    background-color: $accent_1;
+    cursor: pointer;
+}
+
+.Tip_title_text {
+    display: flex;
+    flex-direction: column;
+    padding: 2vh 0;
+}
+
+.Tip_icon {
+    background-color: $accent_1;
+    width: fit-content;
+    padding: 0.5vh 0.5vw;
+    margin: 1vh 1vw;
+    border-radius: 20%;
+}
+
+.Tip_title {
+    font-weight: bold;
+    font-size: large;
+    text-align: left;
+    margin: 0 0 0.5vh 0;
+}
+
+.Tip_text {
+    font-size: small;
+    color: $text_2;
+}
