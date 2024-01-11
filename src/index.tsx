@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import ErrorPage from './components/common/errorPage/ErrorPage';
 import HomePage from './components/specific/homePage/HomePage';
+import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -17,9 +18,20 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/page",
-    element: <HomePage />,
+    element: <ProtectedRoute user="" />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/sss",
+        element: <HomePage />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/1",
+        element: <HomePage />,
+        errorElement: <ErrorPage />,
+      },
+    ],
   },
 ]);
 
