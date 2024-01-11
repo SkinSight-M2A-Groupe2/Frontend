@@ -13,17 +13,17 @@ import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute'
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-  {
     element: <ProtectedRoute user="" />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/sss",
-        element: <HomePage />,
+        path: "/",
+        element: <App />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/protected",
+        element: "protected",
         errorElement: <ErrorPage />,
       },
       {
