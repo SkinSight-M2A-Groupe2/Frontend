@@ -1,9 +1,10 @@
 import './ProtectedRoute.scss';
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { supabase } from 'src/config/supabase-client'
+import { useContext, useEffect, useState } from 'react';
 interface ProtectedRouteProps {
     user: any;
     children?: any;
@@ -12,19 +13,36 @@ interface ProtectedRouteProps {
 
 const Container = (props: any) => {
     const { user } = Auth.useUser()
-    if (user)
-        return props.componentToRender ? props.componentToRender : <Outlet />;
+    if (user || localStorage.getItem('user'))
+        return props.componentToRender ? <Navigate to={props.componentToRender} replace /> : <Outlet />;
 
     return props.children
 }
 
 function ProtectedRoute({ user, children, redirectPath = '/' }: ProtectedRouteProps) {
 
-    // if (!user) {
-    //     return <Navigate to={redirectPath} replace />;
-    // }
+    const [session, setSession] = useState(null)
 
-    // return children ? children : <Outlet />;
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }: any) => {
+            setSession(session)
+        })
+
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session: any) => {
+            setSession(session)
+        })
+
+        return () => subscription.unsubscribe()
+    }, [])
+
+    if (session) {
+        //set localstorage with user data
+        localStorage.setItem('user', JSON.stringify(session));
+    }
+
+
     return (
         <Auth.UserContextProvider supabaseClient={supabase}>
             <Container supabaseClient={supabase} componentToRender={children} >
