@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { supabase } from 'src/config/supabase-client'
-import { useContext, useEffect, useState } from 'react';
+import { USER_TOKEN_STORAGE_KEY } from 'src/config/config';
 interface ProtectedRouteProps {
     user: any;
     children?: any;
@@ -13,35 +13,13 @@ interface ProtectedRouteProps {
 
 const Container = (props: any) => {
     const { user } = Auth.useUser()
-    if (user || localStorage.getItem('user'))
+    if (user || localStorage.getItem(USER_TOKEN_STORAGE_KEY))
         return props.componentToRender ? <Navigate to={props.componentToRender} replace /> : <Outlet />;
 
     return props.children
 }
 
 function ProtectedRoute({ user, children, redirectPath = '/' }: ProtectedRouteProps) {
-
-    const [session, setSession] = useState(null)
-
-    useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }: any) => {
-            setSession(session)
-        })
-
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session: any) => {
-            setSession(session)
-        })
-
-        return () => subscription.unsubscribe()
-    }, [])
-
-    if (session) {
-        //set localstorage with user data
-        localStorage.setItem('user', JSON.stringify(session));
-    }
-
 
     return (
         <Auth.UserContextProvider supabaseClient={supabase}>

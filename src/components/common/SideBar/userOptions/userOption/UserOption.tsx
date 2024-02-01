@@ -5,7 +5,6 @@ function optionAction(option: string) {
     switch (option) {
 
         case "Deconnexion":
-            localStorage.removeItem('user');//delete localstorage user data
             supabase.auth.signOut();
             break;
 
