@@ -10,6 +10,7 @@ import {
 import ErrorPage from './components/common/errorPage/ErrorPage';
 import HomePage from './components/specific/homePage/HomePage';
 import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute';
+import PasswordReset from './components/specific/passwordReset/PasswordReset';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
     ],
+  },
+  {
+    path: "/resetpassword",
+    element: <PasswordReset />,
   },
 ]);
 
