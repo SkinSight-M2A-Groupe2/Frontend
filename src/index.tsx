@@ -11,6 +11,7 @@ import ErrorPage from './components/common/errorPage/ErrorPage';
 import HomePage from './components/specific/homePage/HomePage';
 import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute';
 import PasswordReset from './components/specific/passwordReset/PasswordReset';
+import RendezVous from './components/specific/rendezVous/RendezVous';
 
 const router = createBrowserRouter([
   {
@@ -18,19 +19,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
         element: <App />,
         errorElement: <ErrorPage />,
-      },
-      {
-        path: "/protected",
-        element: "protected",
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "/1",
-        element: <HomePage />,
-        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+          {
+            path: "/prendre-rendez-vous",
+            element: <RendezVous />,
+          },
+        ],
       },
     ],
   },

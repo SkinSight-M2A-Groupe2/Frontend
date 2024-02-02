@@ -1,15 +1,16 @@
-import React from 'react';
 import './App.css';
-// import SideBar from './components/common/SideBar/SideBar';
 import SideBar from 'src/components/common/SideBar/SideBar';
 import OptionsBar from './components/common/optionsBar/OptionsBar';
-import HomePage from './components/specific/homePage/HomePage';
+import { Navigate, Outlet } from 'react-router-dom';
 
-function App() {
+
+function App(props: any) {
   return (
     <div className="App">
       <SideBar />
-      <HomePage />
+
+      {props.children ? <Navigate to={props.children} replace /> : <Outlet />}
+
       <OptionsBar />
     </div>
   );
