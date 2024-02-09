@@ -9,7 +9,6 @@ export default function Page(props: any) {
         if(props.pageName === "Mes Analyses") navigate('/analyses');
         if(props.pageName === "Mes Consultations") navigate('/consultations');
         if(props.pageName === "Mes Rendez-vous") navigate('/rendez-vous');
-        
     }
 
     return (
