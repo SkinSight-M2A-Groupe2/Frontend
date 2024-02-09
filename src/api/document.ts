@@ -18,3 +18,19 @@ export async function getBuckets(): Promise<any[]> {
         throw error
     }
 }
+
+//export async function getBucketObjects(bucketId: string): Promise<any[]> {}
+
+export async function UploadDocuement(bucketId: string, file: File): Promise<any> {
+    try {
+        const { data, error } = await supabase.storage.from(bucketId).upload(file.name, file);
+        if (error) {
+            throw error
+        } else {
+            return data
+        }
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        throw error
+    }
+}

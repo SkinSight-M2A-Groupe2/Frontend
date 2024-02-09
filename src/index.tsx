@@ -12,7 +12,7 @@ import HomePage from './components/specific/homePage/HomePage';
 import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute';
 import PasswordReset from './components/specific/passwordReset/PasswordReset';
 import Appointments from './components/specific/homePage/appointments/Appointments';
-import Documents from './components/specific/homePage/documents/Documents';
+import Documents from './components/specific/documents/Documents';
 const router = createBrowserRouter([
   {
     element: <ProtectedRoute user="" />,

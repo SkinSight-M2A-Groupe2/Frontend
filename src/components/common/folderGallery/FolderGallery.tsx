@@ -30,7 +30,7 @@ const FolderGallery: React.FC<FolderGalleryProps> = ({ buckets }) => {
     }));
 
     setFolders(folderData);
-  }, [buckets]);
+  }, []);
 
   const renderFolders = (folders: any[]) => {
     console.log(folders); 
