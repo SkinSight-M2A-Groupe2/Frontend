@@ -7,12 +7,11 @@ import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import React from 'react';
 
 export default function Pages() {
-
     const [selectedPage, setSelectedPage] = React.useState(null);
-
     // Function to update the state when a click happens in the child component
     const handleChildClick = (pageName: any) => {
         setSelectedPage(pageName);
+     
     };
 
     return (

@@ -11,8 +11,8 @@ import ErrorPage from './components/common/errorPage/ErrorPage';
 import HomePage from './components/specific/homePage/HomePage';
 import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute';
 import PasswordReset from './components/specific/passwordReset/PasswordReset';
-import RendezVous from './components/specific/rendezVous/RendezVous';
-
+import Appointments from './components/specific/homePage/appointments/Appointments';
+import Documents from './components/specific/documents/Documents';
 const router = createBrowserRouter([
   {
     element: <ProtectedRoute user="" />,
@@ -28,8 +28,12 @@ const router = createBrowserRouter([
           },
           {
             path: "/prendre-rendez-vous",
-            element: <RendezVous />,
+            element: <Appointments/>,
           },
+          {
+            path: "/documents",
+            element: <Documents/>,
+          }
         ],
       },
     ],
