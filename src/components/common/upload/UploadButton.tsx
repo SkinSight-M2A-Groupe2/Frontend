@@ -20,7 +20,51 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
+/* const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const files = event.target.files;
+  if (!files || files.length === 0) {
+    return;
+  }
 
+  const file = files[0];
+  try {
+    const { data, error } = await supabase.storage.from('test').upload('file_path', file);
+    if (data) {
+      //getMedia();
+      console.log(data);
+       // Call your function to fetch media after successful upload
+      // Optionally, you can show a success message or perform other actions
+    } else if (error) {
+      // Handle error
+    }
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+};
+
+const UploadButton: React.FC = () => {
+  return (
+    <div>
+      <input
+        type="file"
+        id="file-input"
+        onChange={handleUpload}
+        style={{ display: 'none' }} // Hide the input element
+      />
+      <label htmlFor="file-input">
+        <Button
+          variant="contained"
+          startIcon={<CloudUploadIcon />}
+          component="span" // Use the "span" component for the button
+        >
+          Envoyer
+        </Button>
+      </label>
+    </div>
+  );
+};
+
+export default UploadButton; */
 export default function InputFileUpload() {
    
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -39,21 +83,26 @@ export default function InputFileUpload() {
         }
       };
 
-      async function handleUpload(event: React.ChangeEvent<HTMLInputElement>) {
-        const files = event.target.files;
-        if (!files || files.length === 0) {
+      const handleUpload = async () => {
+        if (!selectedFile) {
           return;
-        }else{
-            const { data, error } = await supabase.storage.from('test').upload('file_path', files[0])
-            if (data) {
-            getMedia();
-            } else {
-            // Handle success
-            }
         }
-      }
+    
+        try {
+          const { data, error } = await supabase.storage.from('test')
+          .upload(selectedFile.name, selectedFile);
+          if (data) {
+            getMedia(); // Call your function to fetch media after successful upload
+            setSelectedFile(null)// Optionally, you can show a success message or perform other actions
+          } else if (error) {
+            // Handle error
+          }
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      };
       async function getMedia() {
-        const { data, error } = await supabase.storage.from('test').list('file_path')
+        const { data, error } = await supabase.storage.from('test').list('*')
         if (error) {
           console.log(error)
         } else {
@@ -75,7 +124,7 @@ export default function InputFileUpload() {
         return iconMap[extension ?? ''] ?? <InsertDriveFileIcon />;
       };
       
-
+  
   return (
     <div>
     <Button component="label" variant="contained" startIcon={<DriveFolderUploadIcon />}>
@@ -88,9 +137,10 @@ export default function InputFileUpload() {
           <div>Selected File:</div>
           <div>{getFileIcon(selectedFile.name)}</div>
           <div>{selectedFile.name}</div> 
-          {/* <Button onClick={handleUpload} variant="contained" startIcon={<CloudUploadIcon />}>
+          <div>{selectedFile.size}</div>
+          <Button onClick={handleUpload} variant="contained" startIcon={<CloudUploadIcon />}>
             Envoyer
-          </Button> */}
+          </Button> 
         </div>
        
       )}
