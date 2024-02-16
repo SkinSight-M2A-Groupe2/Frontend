@@ -16,8 +16,7 @@ export default function HomePage(props: any) {
         const fetchProfile = async () => {
             try {
                 const token = session.access_token;                ; // Get the auth token from the session or wherever it's stored
-                const profileData = await getProfile(token);
-                
+                const profileData = await getProfile(token);   
                 setReqProfile(profileData);
             } catch (error) {
                 console.error('Error fetching profile:', error);

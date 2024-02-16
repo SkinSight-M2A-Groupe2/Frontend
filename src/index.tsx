@@ -13,6 +13,7 @@ import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute'
 import PasswordReset from './components/specific/passwordReset/PasswordReset';
 import Appointments from './components/specific/homePage/appointments/Appointments';
 import Documents from './components/specific/documents/Documents';
+import Chats from './components/specific/chats/chats';
 const router = createBrowserRouter([
   {
     element: <ProtectedRoute user="" />,
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
           {
             path: "/documents",
             element: <Documents/>,
+          },
+          {
+            path: "/chats",
+            element: <Chats />,
           }
         ],
       },
