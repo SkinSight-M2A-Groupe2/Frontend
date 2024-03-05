@@ -1,0 +1,31 @@
+@import 'src/styles/main';
+
+.Tips_main {
+    width: 45%;
+    margin: 0 1vw 0 0;
+}
+
+.Tips_head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 1vh;
+}
+
+.Tips_title {
+    font-weight: bold;
+    font-size: large;
+    margin: 2vh 0 0vh 0;
+    text-align: left;
+}
+
+.Tips_link {
+    margin: 2vh 0 0vh 0;
+    color: $accent_2;
+    font-size: small;
+}
+
+.Tips_link:hover {
+    cursor: pointer;
+}

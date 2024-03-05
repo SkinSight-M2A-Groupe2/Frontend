@@ -8,7 +8,7 @@ export default function OptionsBar() {
         <div className="optionsBar_main">
             <VerticalBorder height="90%" />
             <div className="optionsContainer">
-                <BarOption icon={<CalendarMonthRoundedIcon />} text="Prendre Rendez-vous" description="Vous permet de prendre un rendez-vous" />
+                <BarOption icon={<CalendarMonthRoundedIcon />} text="Prendre Rendez-vous" description="Vous permet de prendre un rendez-vous" link="/prendre-rendez-vous" />
                 <BarOption icon={<CalendarMonthRoundedIcon />} text="Prendre Rendez-vous" description="Vous permet de prendre un rendez-vous" />
                 <BarOption icon={<CalendarMonthRoundedIcon />} text="Prendre Rendez-vous" description="Vous permet de prendre un rendez-vous" />
                 <BarOption icon={<CalendarMonthRoundedIcon />} text="Prendre Rendez-vous" description="Vous permet de prendre un rendez-vous" />

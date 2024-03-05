@@ -3,13 +3,55 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import ErrorPage from './components/common/errorPage/ErrorPage';
+import HomePage from './components/specific/homePage/HomePage';
+import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute';
+import PasswordReset from './components/specific/passwordReset/PasswordReset';
+import Appointments from './components/specific/homePage/appointments/Appointments';
+import Documents from './components/specific/documents/Documents';
+import Chats from './components/specific/chats/chats';
+const router = createBrowserRouter([
+  {
+    element: <ProtectedRoute user="" />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        element: <App />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+          {
+            path: "/prendre-rendez-vous",
+            element: <Appointments/>,
+          },
+          {
+            path: "/documents",
+            element: <Documents/>,
+          },
+          {
+            path: "/chats",
+            element: <Chats />,
+          }
+        ],
+      },
+    ],
+  },
+  {
+    path: "/resetpassword",
+    element: <PasswordReset />,
+  },
+]);
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
