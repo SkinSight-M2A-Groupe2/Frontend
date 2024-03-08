@@ -5,17 +5,34 @@ import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-const ChatElements = ({chat}:any) => {
+import Chat from 'src/types/Chats';
+const ChatElements = ({ chat,user_id }: { chat: Chat ; user_id :any } ) => {
+ // console.log('chat ListItem',chat)
+  // get the users who not the current user
+  
+  console.log(chat)
+  const otherUsers = chat.users.filter((userData) => userData.user.id !== user_id);
+  const otherUser = otherUsers[0].user;
+  const formatTimestamp = (timestamp: string) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
     return (
       
         
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt={chat.name} src={chat.avatar} />
-          </ListItemAvatar>
+        <ListItem sx={{
+          '&:hover': {
+            backgroundColor: '#f8faff',
+          },
+          backgroundColor:'blue',
+        
+        }} key={chat.id} alignItems="flex-start">
+           <ListItemAvatar>
+        <Avatar alt={otherUser.last_name || 'null'} src={otherUser.last_name || 'null'} />
+      </ListItemAvatar>
           <ListItemText
-            primary={chat.name}
-            secondary={
+            primary={(otherUser.last_name || 'null') + ' ' + (otherUser.first_name || 'null')}            secondary={
               <React.Fragment>
                 <Typography
                   sx={{ display: 'inline' }}
@@ -23,9 +40,10 @@ const ChatElements = ({chat}:any) => {
                   variant="body2"
                   color="text.primary"
                 >
-                  {chat.message}
+                  {chat.messages[0] ? chat.messages[0].content : 'No message'}
                 </Typography>
-                {chat.time}
+               <Typography align="right">
+               {chat.messages[0] ? formatTimestamp(chat.messages[0].created_at) : 'No Time'}               </Typography>
               </React.Fragment>
             }
           />
