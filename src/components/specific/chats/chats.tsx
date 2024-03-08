@@ -17,6 +17,7 @@ import Item from '@mui/material/Grid';
 import { Chat } from '@mui/icons-material';
 import ChatSideBar from './chat/ChatSideBar';
 import './chats.scss';
+import {  ChatConversation } from './conversations/ChatConversation';
 /* const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -44,8 +45,7 @@ const Chats = () => {
     <div className='chat_container'>
     
         <ChatSideBar/>
-    
-    <div>Chats</div>
+        <ChatConversation/>
     </div>
   );
 }

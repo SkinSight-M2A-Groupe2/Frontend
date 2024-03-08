@@ -12,6 +12,7 @@ export default function HomePage(props: any) {
 
     // Passage par backend 
     const [reqProfile, setReqProfile] = useState<any | null>(null); 
+    
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -22,12 +23,12 @@ export default function HomePage(props: any) {
                 console.error('Error fetching profile:', error);
             }
         };
-
         fetchProfile();
     }, []);
     //const [user,setUser] = useState<any | null>(null);
     console.log('state requete',reqProfile)
     console.log(session);
+    console.log('profile',profile);
     if (!profile) {
         return <div>loading...</div>;
     }

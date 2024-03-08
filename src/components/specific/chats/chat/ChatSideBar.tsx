@@ -1,15 +1,56 @@
 import { Avatar, Box, IconButton, List, Paper, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MapsUgcIcon from '@mui/icons-material/MapsUgc';
-import { Chat, Search } from "@mui/icons-material";
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import ChatElements from "./ChatElements";
+import { useAuth } from "src/hooks/Auth";
+import Chat  from "src/types/Chats";
+import { getAllChats } from "src/api/chats";
 const ChatSideBar = () => {
-    const ChatList=[
+
+    const { profile,session } = useAuth();
+    const [chatList, setAllChats] = useState<Chat[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+  
+    const incomingMessages = [
+      {
+          id: 1,
+          message: "Hello",
+          user_id: 1,
+      },{
+          id: 2,
+          message: "How are you",
+          user_id: 2,
+      },{
+          id: 3,
+          message: "I am good",
+          user_id: 1,
+      }
+    ];
+  
+    useEffect(() => {
+        console.log('profile',profile)
+      setLoading(true);
+      if (profile) {
+        const fetchAllChats = async () => {
+          try{
+            const allChatsData : Chat[] = await getAllChats(profile.id);
+              setAllChats(allChatsData);
+                console.log('chatList state',chatList)
+          }catch{
+  
+          }finally{
+            setLoading(false);
+          }       
+        };
+        fetchAllChats();
+    }
+    }, [profile]);
+   /*  const ChatList=[
         {
             id:1,
             name:'Remy Sharp',
@@ -80,7 +121,7 @@ const ChatSideBar = () => {
             time:'12:00',
             avatar:'/static/images/avatar/1.jpg'
         },
-    ]
+    ] */
     return (
         <>
         <Box 
@@ -125,12 +166,16 @@ const ChatSideBar = () => {
             <Divider/>
             <Stack spacing={2}>
             <Box style={{maxHeight: '75vh', overflow: 'auto'}}>
-                {ChatList.map((chat)=>(
-                     <List sx={{ width: '100%',overflowY:'auto', maxWidth:'100%', bgcolor: 'background.paper' }}>
-                    <ChatElements chat={chat
-                    } key={chat.id}/>
+                {/* if loading is false show the list */}
+                {loading ? (
+                <p>Loading...</p>
+            ) : (
+                chatList.map((chat) => (
+                    <List sx={{ width: '100%', overflowY: 'auto', maxWidth: '100%', bgcolor: 'background.paper' }} key={chat.id}>
+                        <ChatElements user_id={profile.id} chat={chat} />
                     </List>
-                ))}
+                ))
+            )}
             </Box>
            </Stack>
         </Stack>
