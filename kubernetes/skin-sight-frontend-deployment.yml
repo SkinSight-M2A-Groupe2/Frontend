@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skin-sight-frontend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: skin-sight-frontend
+  template:
+    metadata:
+      labels:
+        app: skin-sight-frontend
+    spec:
+      containers:
+        - name: skin-sight-frontend
+        # note: les images sont toutes tirées de docker hub, elles ne seront pas tirées localement par défaut
+          # image: luluberlute/frontend_skin-sight-frontend:latest
+          image: frontend-skin-sight-frontend:latest
+          imagePullPolicy: IfNotPresent
+          envFrom: 
+            - secretRef:
+                name: frontend-supabase-secrets
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+
+# apply the whole frontend with this command
+# kubectl apply -f ./kubernetes/skin-sight-frontend-service.yml -f ./kubernetes/skin-sight-frontend-secrets.yml -f ./kubernetes/skin-sight-frontend-deployment.yml
+
+# get the pod external IP
+# kubectl get svc skin-sight-frontend-service

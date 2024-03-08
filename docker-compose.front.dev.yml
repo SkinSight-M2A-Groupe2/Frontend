@@ -3,9 +3,11 @@ version: "3.8"
 services:
   
   skin-sight-frontend:
+    container_name: skin-sight-frontend
     build:
       context: .
       target: development
+    env_file: .env
     volumes:
       - type: bind
         source: ./
@@ -15,3 +17,5 @@ services:
     command: npm start
     ports:
       - "3000:3000"
+
+# docker compose -f docker-compose.front.dev.yml build

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: skin-sight-frontend-service
+spec:
+  type: LoadBalancer
+  selector:
+    # expose the pod with this label to the outside world (review the deployment file)
+    app: skin-sight-frontend
+  ports:
+    - name: skin-sight-frontend # name of the service
+      protocol: TCP
+      port: 3000 # port of the NodePort Service
+      targetPort: 3000 # port of the express app in the pod
+      nodePort: 30001
+
+# kubectl apply -f ./kubernetes/skin-sight-frontend-service.yml
+
+# kubectl delete -f ./kubernetes/skin-sight-frontend-service.yml
