@@ -26,8 +26,7 @@ export default function HomePage(props: any) {
         fetchProfile();
     }, []);
     //const [user,setUser] = useState<any | null>(null);
-    console.log('state requete',reqProfile)
-    console.log(session);
+    
     console.log('profile',profile);
     if (!profile) {
         return <div>loading...</div>;
