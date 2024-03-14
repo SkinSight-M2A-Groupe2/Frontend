@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: frontend-supabase-secrets
+type: Opaque
+data:
+  REACT_APP_SUPABASE_JWT_SECRET: b01jeE4vSTN1dzBBMWlVQnBHRTBwSGJTQWo1RGZvSzVFQ3I5UkRPSkxHQlQrVEkrenVubW14T2I4S0VnWDI1RGNRYTgxVmRtMXV4Y3djdXdCazFJMXc9PQ==
+  REACT_APP_SUPABASE_API_URL: aHR0cHM6Ly9rYmFtdHdpamd0YnB5ZHF1emNuZC5zdXBhYmFzZS5jby8=
+  REACT_APP_SUPABASE_ANON_KEY: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW10aVlXMTBkMmxxWjNSaWNIbGtjWFY2WTI1a0lp
+  REACT_APP_BACKEND_API_URL: aHR0cDovL2xvY2FsaG9zdDo1MDAw
+
+# stringData:
+#   REACT_APP_SUPABASE_JWT_SECRET: oMcxN/I3uw0A1iUBpGE0pHbSAj5DfoK5ECr9RDOJLGBT+TI+zunmmxOb8KEgX25DcQa81Vdm1uxcwcuwBk1I1w==
+#   REACT_APP_SUPABASE_API_URL: https://kbamtwijgtbpydquzcnd.supabase.co
+#   REACT_APP_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtiYW10d2lqZ3RicHlkcXV6Y25kIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc0NzQ4NDUsImV4cCI6MjAyMzA1MDg0NX0.1_5MVCZ8qg_2fcuSuwJTehh-l6ft3Sb8TBKpHh3X1I8
+# #API
+#   REACT_APP_BACKEND_API_URL: http://localhost:5000
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skin-sight-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: skin-sight-frontend
+  template:
+    metadata:
+      labels:
+        app: skin-sight-frontend
+    spec:
+      containers:
+        - name: skin-sight-frontend
+        # note: les images sont toutes tirées de docker hub, elles ne seront pas tirées localement par défaut
+          # image: luluberlute/frontend_skin-sight-frontend:latest
+          image: frontend-skin-sight-frontend:latest
+          imagePullPolicy: IfNotPresent
+          envFrom: 
+            - secretRef:
+                name: frontend-supabase-secrets
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skin-sight-frontend-service
+spec:
+  type: LoadBalancer
+  selector:
+    # expose the pod with this label to the outside world (review the deployment file)
+    app: skin-sight-frontend
+  ports:
+    - name: skin-sight-frontend # name of the service
+      protocol: TCP
+      port: 3000 # port of the NodePort Service
+      targetPort: 3000 # port of the express app in the pod
+      nodePort: 30001

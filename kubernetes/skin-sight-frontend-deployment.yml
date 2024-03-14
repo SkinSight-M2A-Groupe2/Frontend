@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: skin-sight-frontend-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: skin-sight-frontend
@@ -36,3 +36,4 @@ spec:
 
 # get the pod external IP
 # kubectl get svc skin-sight-frontend-service
+
