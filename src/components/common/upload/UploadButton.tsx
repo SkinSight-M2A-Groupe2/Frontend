@@ -1,12 +1,13 @@
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import ImageIcon from '@mui/icons-material/Image';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { supabase } from 'src/config/supabase-client';
+import { useAuth } from 'src/hooks/Auth';
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -66,14 +67,10 @@ const UploadButton: React.FC = () => {
 
 export default UploadButton; */
 export default function InputFileUpload() {
-   
+  const { profile,session } = useAuth();
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-        console.log(file);
-        }
-    };
+    
+   
     const handleFileChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         console.log(files);
@@ -90,7 +87,7 @@ export default function InputFileUpload() {
     
         try {
           const { data, error } = await supabase.storage.from('test')
-          .upload(selectedFile.name, selectedFile);
+          .upload(profile.id+'/' +selectedFile.name, selectedFile);
           if (data) {
             getMedia(); // Call your function to fetch media after successful upload
             setSelectedFile(null)// Optionally, you can show a success message or perform other actions
@@ -102,7 +99,7 @@ export default function InputFileUpload() {
         }
       };
       async function getMedia() {
-        const { data, error } = await supabase.storage.from('test').list('*')
+        const { data, error } = await supabase.storage.from('test').list(profile.id+'/')  
         if (error) {
           console.log(error)
         } else {
