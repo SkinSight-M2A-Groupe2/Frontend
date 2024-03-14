@@ -13,6 +13,7 @@ import ProtectedRoute from './components/specific/protectedRoute/ProtectedRoute'
 import PasswordReset from './components/specific/passwordReset/PasswordReset';
 import Appointments from './components/specific/homePage/appointments/Appointments';
 import Documents from './components/specific/documents/Documents';
+import RendezVous from './components/specific/rendezVous/RendezVous';
 const router = createBrowserRouter([
   {
     element: <ProtectedRoute user="" />,
@@ -28,11 +29,15 @@ const router = createBrowserRouter([
           },
           {
             path: "/prendre-rendez-vous",
-            element: <Appointments/>,
+            element: <RendezVous />,
+          },
+          {
+            path: "/mes-rendez-vous",
+            element: <Appointments />,
           },
           {
             path: "/documents",
-            element: <Documents/>,
+            element: <Documents />,
           }
         ],
       },
