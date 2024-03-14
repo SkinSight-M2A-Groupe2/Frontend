@@ -1,10 +1,16 @@
 import { useRouteError } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import './ErrorPage.scss';
 
 export default function ErrorPage() {
     const error: any = useRouteError();
     console.error(error);
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/`);
+    };
 
     return (
         /*<div id="error-page">
@@ -19,7 +25,7 @@ export default function ErrorPage() {
             <div className="stars">
                 <div className="central-body">
                     <img alt="ima" className="image-404" src="http://salehriaz.com/404Page/img/404.svg" width="300px" />
-                    <a href="/" className="btn-go-home">GO BACK HOME</a>
+                    <div className="btn-go-home" onClick={handleClick}>GO BACK HOME</div>
                 </div>
                 <div className="objects">
                     <img alt="ima" className="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px" />
