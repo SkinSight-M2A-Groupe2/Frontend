@@ -1,6 +1,6 @@
 # Optional - The name of the workflow as it will appear in the "Actions" tab of the GitHub repository. 
 # If this field is omitted, the name of the workflow file will be used instead.
-name: backend-workflow
+name: frontend-workflow
 
 # Specifies the trigger for this workflow. This example uses the push event, so a workflow run is triggered every time someone pushes a change to the repository or merges a pull request. 
 # This is triggered by a push to the main and the github-actions-backend branches;
@@ -100,7 +100,7 @@ jobs:
               uses: snyk/actions/docker@master
               continue-on-error: true
               with: 
-                image: frontend_skin-sight-backend:latest
+                image: frontend_skin-sight-frontend:latest
               env:
                 SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
@@ -134,7 +134,7 @@ jobs:
                 
             - name: Push the Docker image to the DockerHub registry
               run: |
-                    docker tag frontend_skin-sight-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend_skin-sight-backend
-                    docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend_skin-sight-backend
+                    docker tag frontend_skin-sight-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend_skin-sight-frontend
+                    docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend_skin-sight-frontend
 
     
